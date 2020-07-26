@@ -6,15 +6,21 @@ Test interaction de base à adapter selon besoin
 class Target {
   PVector position;
   PVector velocity;
+  PVector acceleration;
 
   Target() {
     position = new PVector(100, 100);
     velocity = new PVector(2.5, 2);
+    acceleration = new PVector(0,0);
   }
 
   // Déplacement de la cible
   void update() {
+    acceleration = PVector.random2D();
+    velocity.add(acceleration);
     position.add(velocity);
+    velocity.limit(5);
+    
     if ((position.x > width) || (position.x < 0)) {
       velocity.x *= -1;
     }
